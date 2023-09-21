@@ -40,7 +40,7 @@ const CreateTaskForm = ({ tasks, toggle }: CreateTaskFormType) => {
     };
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
 
             <input
                 className={s.text_input}

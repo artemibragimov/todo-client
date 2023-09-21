@@ -1,3 +1,9 @@
+.form {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 24px;
+}
+
 .form_error {
     color: red;
     text-align: center;
@@ -5,8 +11,8 @@
 
 .text_input {
     display: block;
-    width: 70%;
-    margin: 4% auto 2% auto;
+    width: 74%;
+    margin: 4% auto 0 auto;
     padding: 2%;
     font-family: inherit;
     font-size: 24px;
@@ -55,6 +61,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.form_btn p{
+    margin-left: 10px;
 }
 
 .form_buttons p {

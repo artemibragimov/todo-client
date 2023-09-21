@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import s from './Dropdown.module.css'
 import { DoneIcon, DoneActiveIcon } from '../../assets';
 
@@ -6,9 +6,11 @@ import { DoneIcon, DoneActiveIcon } from '../../assets';
 interface Dropdown {
     activeFilter: string;
     setActiveFilter: (arg0: string) => void;
+    tasks: Array<{ id: number, isDone: boolean, name: string, date: string }>;
+    setFilteredTask: (filterTask: Array<{ id: number, isDone: boolean, name: string, date: string }>) => void;
 }
 
-const Dropdown = ({ activeFilter, setActiveFilter }: Dropdown) => {
+const Dropdown = ({ activeFilter, setActiveFilter, tasks, setFilteredTask }: Dropdown) => {
 
     const [selected, setSelected] = useState<string>('');
     const [dropdown, setDropdown] = useState<boolean | null>(null);
@@ -22,10 +24,21 @@ const Dropdown = ({ activeFilter, setActiveFilter }: Dropdown) => {
     };
 
     const handleItemClick = (name: string) => {
+
+        if (name == 'Done') {
+            tasks = tasks.filter((task) => task.isDone)
+        } else if (name == 'Undone') {
+            tasks = tasks.filter((task) => !task.isDone)
+        }
+        setFilteredTask(tasks)
         setSelected(name);
         setActiveFilter(name);
         setDropdown(!dropdown);
     };
+
+    useEffect(() => {
+        setDropdown(false);
+    }, [activeFilter])
 
     return (
         <div>
@@ -38,10 +51,10 @@ const Dropdown = ({ activeFilter, setActiveFilter }: Dropdown) => {
                 <ul className={s.list}>
 
                     {options.map((obj: string, i: number) => (
-                        <li key={i} className={s.btn + ' ' + s.item + ' ' + `${selected == obj ? s.btn_active : s.btn_nonActive}`}
+                        <li key={i} className={s.btn + ' ' + s.item + ' ' + `${activeFilter === obj ? s.btn_active : s.btn_nonActive}`}
                             onClick={() => handleItemClick(obj)}
                         >
-                            {selected == obj ? <DoneActiveIcon /> : <DoneIcon />}
+                            {activeFilter === obj ? <DoneActiveIcon /> : <DoneIcon />}
                             {obj}
                         </li>
                     ))}
@@ -51,7 +64,5 @@ const Dropdown = ({ activeFilter, setActiveFilter }: Dropdown) => {
     );
 
 };
-
-
 
 export default Dropdown;

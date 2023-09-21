@@ -9,7 +9,8 @@ interface Task {
     changeIsDone: (id: number) => void
 }
 
-const Task = ({ isDone, name, date, id, changeIsDone }: Task) => (
+const Task = ({ isDone, name, date, id, changeIsDone }: Task) => {
+    return(
     <div className={s.task}>
 
         <button onClick={() => changeIsDone(id)}>
@@ -24,6 +25,6 @@ const Task = ({ isDone, name, date, id, changeIsDone }: Task) => (
             <SettingsIcon />
         </div>
     </div>
-)
+)}
 
 export { Task }

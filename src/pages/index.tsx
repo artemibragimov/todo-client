@@ -20,23 +20,26 @@ export default function Home() {
     { id: 3, isDone: true, name: 'learn 3', date: '19.09.2023' },
   ]);
 
+  const [filteredTask, setFilteredTask] = useState(tasks)
+
   const changeIsDone = (id: number) => {
-    const filteredTasks = tasks.filter((task) => task.id == id)
+    const filteredTasks = filteredTask.filter((task) => task.id == id)
+
     const { isDone, ...otherData } = filteredTasks[0]
+
     const changeTask = {
       isDone: !isDone,
       ...otherData
     }
 
-    const newTasks = tasks.filter((task) => task.id !== id)
+    const newTasks = filteredTask.filter((task) => task.id !== id)
     newTasks.push(changeTask)
 
     newTasks.sort(function (a, b) {
-      return parseFloat(a.id) - parseFloat(b.id);
+      return parseFloat(`${a.id}`) - parseFloat(`${b.id}`);
     });
-    setTasks(newTasks)
+    setFilteredTask(newTasks)
   }
-
 
   return (
     <div>
@@ -53,6 +56,8 @@ export default function Home() {
             />
 
             <Dropdown
+              tasks={tasks}
+              setFilteredTask={setFilteredTask}
               activeFilter={activeFilter}
               setActiveFilter={setActiveFilter}
             />
@@ -78,7 +83,7 @@ export default function Home() {
         </div>
 
         <div className={s.taskBoard}>
-          {tasks.map((obj, index) => (
+          {filteredTask.map((obj, index) => (
             <Task
               changeIsDone={changeIsDone}
               key={index}
@@ -92,16 +97,12 @@ export default function Home() {
 
       <Modal isOpen={isOpen} toggle={toggle} setActive={() => setActiveFilter('')}>
         <>
-          <div className={s.modalTitle} >
-            Crate task
-          </div>
+          <span>Crate task</span>
 
-          <div className={s.modalContent} >
-            <CreateTaskForm
-              tasks={tasks}
-              toggle={toggle}
-            />
-          </div>
+          <CreateTaskForm
+            tasks={tasks}
+            toggle={toggle}
+          />
         </>
       </Modal>
     </div>
