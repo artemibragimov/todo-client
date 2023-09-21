@@ -1,64 +1,49 @@
-'use client'
+'use client';
 
-import s from './home.module.css'
-import { Task } from '../components/task/Task'
-import { useState } from 'react'
+import s from './home.module.css';
+import { Task } from '../components/task/Task';
+import { useState } from 'react';
 import Modal from "../components/modal/Modal";
 import useModal from "../hooks/useModal";
-import { useForm, SubmitHandler } from "react-hook-form";
-import Image from 'next/image';
 import { CelendarIcon, CelendarActiveIcon, DoneIcon, DoneActiveIcon, DateIcon, DateActiveIcon, AddIcon, AddActiveIcon } from '../assets';
 import { HomePageButton } from '../components/homePageButton/HomePageButton';
-
-type Inputs = {
-  text: string,
-};
+import { CreateTaskForm } from '../components/createTaskForm/CreateTaskForm';
+import Dropdown from '../components/Dropdown/Dropdown';
 
 export default function Home() {
 
+  const { isOpen, toggle } = useModal();
+  const [activeFilter, setActiveFilter] = useState('Today');
   const [tasks, setTasks] = useState([
     { id: 1, isDone: false, name: 'learn 1', date: '19.09.2023' },
     { id: 2, isDone: false, name: 'learn 2', date: '19.09.2023' },
-    { id: 3, isDone: false, name: 'learn 3', date: '19.09.2023' },
-  ])
+    { id: 3, isDone: true, name: 'learn 3', date: '19.09.2023' },
+  ]);
 
-  const [activeFilter, setActiveFilter] = useState('')
-
-  const { isOpen, toggle } = useModal();
-
-  const { register, handleSubmit, reset, formState: { errors } } = useForm<Inputs>({
-    defaultValues: {
-      text: ''
-    }
-  });
-
-  const onSubmit: SubmitHandler<Inputs> = data => {
-    const newTask = {
-      id: tasks.length + 1,
-      isDone: false,
-      name: data.text,
-      date: ''
+  const changeIsDone = (id: number) => {
+    const filteredTasks = tasks.filter((task) => task.id == id)
+    const { isDone, ...otherData } = filteredTasks[0]
+    const changeTask = {
+      isDone: !isDone,
+      ...otherData
     }
 
-    tasks.push(newTask)
-    reset({
-      text: ''
-    })
-    toggle()
-    setActiveFilter('')
-  };
+    const newTasks = tasks.filter((task) => task.id !== id)
+    newTasks.push(changeTask)
 
-  const onClose = () => {
-    toggle()
-    errors.text = undefined
-    setActiveFilter('')
+    newTasks.sort(function (a, b) {
+      return parseFloat(a.id) - parseFloat(b.id);
+    });
+    setTasks(newTasks)
   }
+
 
   return (
     <div>
       <div className={s.taskContainer}>
         <div className={s.taskSettings}>
           <div className={s.topBar}>
+
             <HomePageButton
               activeFilter={activeFilter}
               setActiveFilter={setActiveFilter}
@@ -67,12 +52,9 @@ export default function Home() {
               Icon={CelendarIcon}
             />
 
-            <HomePageButton
+            <Dropdown
               activeFilter={activeFilter}
               setActiveFilter={setActiveFilter}
-              name='All'
-              ActiveIcon={DoneActiveIcon}
-              Icon={DoneIcon}
             />
 
             <HomePageButton
@@ -90,58 +72,38 @@ export default function Home() {
               setActiveFilter={setActiveFilter}
               name='Add task'
               ActiveIcon={AddActiveIcon}
-              Icon={AddIcon}
+              Icon={AddActiveIcon}
             />
           </div>
         </div>
 
         <div className={s.taskBoard}>
           {tasks.map((obj, index) => (
-            <Task key={index} isDone={obj.isDone} name={obj.name} date={obj.date} />
+            <Task
+              changeIsDone={changeIsDone}
+              key={index}
+              id={obj.id}
+              isDone={obj.isDone}
+              name={obj.name}
+              date={obj.date} />
           ))}
         </div>
       </div>
 
-
       <Modal isOpen={isOpen} toggle={toggle} setActive={() => setActiveFilter('')}>
-
         <>
           <div className={s.modalTitle} >
             Crate task
           </div>
 
           <div className={s.modalContent} >
-
-            <form onSubmit={handleSubmit(onSubmit)}>
-
-              <input
-                className={s.text_input}
-                placeholder='Enter text'
-                {...register("text", { required: true })}
-              />
-
-              {errors.text ? <div className={s.form_error}>This field should not be empty</div> : <div><br /></div>}
-
-              <div className={s.form_btns}>
-
-                <button className={s.submit_button + ' ' + s.form_buttons} type="submit">
-                  <Image src='Check_ring.svg' alt='Save' width={30} height={30} />
-                  <p>Save</p>
-                </button>
-
-                <button className={s.close_button + ' ' + s.form_buttons} onClick={onClose}>
-                  <Image src='close.svg' alt='Close' width={30} height={30} />
-                  <p>Close</p>
-                </button>
-
-              </div>
-              
-            </form>
-
+            <CreateTaskForm
+              tasks={tasks}
+              toggle={toggle}
+            />
           </div>
         </>
-
       </Modal>
     </div>
-  )
+  );
 }

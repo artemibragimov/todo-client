@@ -20,15 +20,6 @@
     cursor: pointer;
 }
 
-.btn:hover {
-    background: rgba(147, 51, 234, 0.06);
-}
-
-.btn:focus {
-    background: rgba(147, 51, 234, 0.06);
-    color: #9333EA;
-}
-
 .btn svg{
     display: flex;
     align-items: center;
@@ -40,12 +31,29 @@
     color: #6B7280;
 }
 
-
 .btn_active {
     background: rgba(147, 51, 234, 0.06);
     color: #9333EA;
 }
 
-.addTask {
-    color: #9333EA;
+.btn:hover {
+    background: rgba(147, 51, 234, 0.06);
+}
+
+.btn:focus {
+    background: rgba(147, 51, 234, 0.06);
+}
+
+.list {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 24px;
+    background: rgba(147, 51, 234, 0.06);
+
+    border-style: none;
+    border-radius: 10px;
+}
+
+.item{
+    margin: 0; 
 }

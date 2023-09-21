@@ -10,8 +10,11 @@ interface HomePageButtonType {
 
 const HomePageButton = ({ activeFilter, setActiveFilter, name, ActiveIcon, Icon }: HomePageButtonType) => {
     const className = activeFilter === name ? s.btn_active : s.btn_nonActive
+    const onClick = () => {
+        name === 'Add task' ? null : setActiveFilter(name)
+    }
     return (
-        <button onClick={() => setActiveFilter(name)} className={s.btn + ' ' + className} role="button" >
+        <button onClick={onClick} className={s.btn + ' ' + className+' '+`${name === 'Add task' && s.addTask}`} role="button" >
             {activeFilter === `${name}` ? <ActiveIcon /> : <Icon />}
             {name}
         </button >
