@@ -1,0 +1,22 @@
+.task {
+    margin: 1% auto;
+    padding: 0 15px;
+    height: 10%;
+    display: flex;
+    align-items: center;
+
+    background: rgba(147, 51, 234, 0.06);
+    border-radius: 10px;
+}
+
+.task_name {
+    margin: 0 auto 0 35px;
+    font-size: 25px;
+}
+
+.task_date {
+    display: flex;
+    align-items: center;
+
+    color: #6B7280;
+}
