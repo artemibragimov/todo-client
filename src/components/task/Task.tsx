@@ -1,23 +1,27 @@
-import Image from 'next/image'
-import s from './Task.module.css'
+import s from './Task.module.css';
+import { CopleteIcon, SettingsIcon, NonCopleteIcon } from '../../assets';
 
 interface Task {
-    activeFilter: string;
-    setActiveFilter: (arg0: string) => void;
+    isDone: boolean;
     name: string;
-    ActiveIcon: React.FC<React.SVGProps<SVGAElement>>;
-    Icon: React.FC<React.SVGProps<SVGAElement>>;
+    date: string;
+    id: number;
+    changeIsDone: (id: number) => void
 }
 
-const Task = ({ isDone, name, date }) => (
+const Task = ({ isDone, name, date, id, changeIsDone }: Task) => (
     <div className={s.task}>
-        <Image src='completed.svg' alt='Completed Icon' width={30} height={30} />
+
+        <button onClick={() => changeIsDone(id)}>
+            {isDone ? <CopleteIcon /> : <NonCopleteIcon />}
+        </button>
+
         <div className={s.task_name}>
             {name}
         </div>
         <div className={s.task_date}>
             {date}
-            <Image src='settings.svg' alt='Settings Icon' width={30} height={20} />
+            <SettingsIcon />
         </div>
     </div>
 )

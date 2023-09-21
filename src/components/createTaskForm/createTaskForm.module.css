@@ -1,0 +1,81 @@
+.form_error {
+    color: red;
+    text-align: center;
+}
+
+.text_input {
+    display: block;
+    width: 70%;
+    margin: 4% auto 2% auto;
+    padding: 2%;
+    font-family: inherit;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #bdbdbd;
+    border-radius: 10px;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.text_input::placeholder {
+    color: #212529;
+    opacity: 0.4;
+}
+
+.text_input:focus {
+    color: #212529;
+    background-color: #fff;
+    border-color: #bdbdbd;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(158, 158, 158, 0.25);
+}
+
+.btn_container {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+    margin-top: 2%;
+    width: 74%;
+}
+
+.form_btn{
+    border-radius: 10px;
+    border-style: none;
+    font-size: 24px;
+    transition: color 100ms;
+    padding: 20px 10px;
+    width: 45%;
+    height: 10%;
+    text-align: left;
+    align-items: center;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.form_buttons p {
+    margin: 0;
+    margin-left: 5%;
+}
+
+.submit_button {
+    background-color: #67b9cb44;
+    color: #67B8CB;
+}
+
+.submit_button:hover {
+    background: #67b9cbad;
+}
+
+.close_button {
+    background: #6b728044;
+    color: #6B7280;
+}
+
+.close_button:hover {
+    background: #6b7280ad;
+}
