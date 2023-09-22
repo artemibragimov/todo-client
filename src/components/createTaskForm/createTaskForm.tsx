@@ -3,7 +3,7 @@ import { SaveIcon, CloseIcon } from '../../assets';
 import { useForm, SubmitHandler } from "react-hook-form";
 
 interface CreateTaskFormType {
-    tasks: Array<{ id: Number, isDone: Boolean, name: String, date: String }>
+    filteredTask: Array<{ id: Number, isDone: Boolean, name: String, date: String }>
     toggle: () => void;
 }
 
@@ -11,7 +11,7 @@ type Inputs = {
     text: string,
 };
 
-const CreateTaskForm = ({ tasks, toggle }: CreateTaskFormType) => {
+const CreateTaskForm = ({ filteredTask, toggle }: CreateTaskFormType) => {
 
     const { register, handleSubmit, reset, formState: { errors } } = useForm<Inputs>({
         defaultValues: {
@@ -20,14 +20,16 @@ const CreateTaskForm = ({ tasks, toggle }: CreateTaskFormType) => {
     });
 
     const onSubmit: SubmitHandler<Inputs> = data => {
+        const date = new Date().toLocaleString().slice(0, 10)
+
         const newTask = {
-            id: tasks.length + 1,
+            id: filteredTask.length + 1,
             isDone: false,
             name: data.text,
-            date: ''
+            date: date
         };
 
-        tasks.push(newTask);
+        filteredTask.push(newTask);
         reset({
             text: ''
         });
@@ -53,7 +55,7 @@ const CreateTaskForm = ({ tasks, toggle }: CreateTaskFormType) => {
             <div className={s.btn_container}>
 
                 <button className={s.submit_button + ' ' + s.form_btn} type="submit">
-                    <SaveIcon/>
+                    <SaveIcon />
                     <p>Save</p>
                 </button>
 
@@ -61,7 +63,7 @@ const CreateTaskForm = ({ tasks, toggle }: CreateTaskFormType) => {
                     <CloseIcon />
                     <p>Close</p>
                 </button>
-                
+
             </div>
         </form>
     )

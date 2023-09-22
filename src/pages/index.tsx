@@ -8,7 +8,7 @@ import useModal from "../hooks/useModal";
 import { CelendarIcon, CelendarActiveIcon, DoneIcon, DoneActiveIcon, DateIcon, DateActiveIcon, AddIcon, AddActiveIcon } from '../assets';
 import { HomePageButton } from '../components/homePageButton/HomePageButton';
 import { CreateTaskForm } from '../components/createTaskForm/CreateTaskForm';
-import Dropdown from '../components/Dropdown/Dropdown';
+import Dropdown from '../components/dropdown/Dropdown';
 
 export default function Home() {
 
@@ -23,7 +23,7 @@ export default function Home() {
   const [filteredTask, setFilteredTask] = useState(tasks)
 
   const changeIsDone = (id: number) => {
-    const filteredTasks = filteredTask.filter((task) => task.id == id)
+    const filteredTasks = tasks.filter((task) => task.id == id)
 
     const { isDone, ...otherData } = filteredTasks[0]
 
@@ -32,12 +32,13 @@ export default function Home() {
       ...otherData
     }
 
-    const newTasks = filteredTask.filter((task) => task.id !== id)
+    const newTasks = tasks.filter((task) => task.id !== id)
     newTasks.push(changeTask)
 
     newTasks.sort(function (a, b) {
       return parseFloat(`${a.id}`) - parseFloat(`${b.id}`);
     });
+    setTasks(newTasks)
     setFilteredTask(newTasks)
   }
 
@@ -100,7 +101,7 @@ export default function Home() {
           <span>Crate task</span>
 
           <CreateTaskForm
-            tasks={tasks}
+            filteredTask={filteredTask}
             toggle={toggle}
           />
         </>

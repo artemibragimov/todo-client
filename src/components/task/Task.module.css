@@ -1,5 +1,5 @@
 .task {
-    margin: 1% auto;
+    margin: 1% auto 0 auto;
     padding: 15px;
     height: 10%;
     display: flex;
@@ -19,12 +19,36 @@
 
 .task_date {
     font-size: 16px;
-    display: flex;
-    align-items: center;
-
     color: #6B7280;
 }
 
 .task_date svg {
     margin-left: 15px;
+}
+
+.setting {
+    width: 20px;
+    height: 15px;
+}
+
+.setting svg{
+    margin: auto;
+}
+
+.setting_btns {
+    display: flex;
+    align-items: center;
+
+    margin-left: auto;
+    padding: 0 5px;
+    width: max-content;
+    background: #FFFFFF;
+    border: 2px solid #7D40FF;
+    border-radius: 15px;
+}
+
+.setting_btns button {
+    display: flex;
+    align-items: center;
+    margin: 2px;
 }
