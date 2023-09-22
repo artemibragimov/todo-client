@@ -19,10 +19,6 @@ const Dropdown = ({ activeFilter, setActiveFilter, tasks, setFilteredTask }: Dro
 
     let activ = activeFilter === selected ? true : false
 
-    const handleClick = () => {
-        setDropdown(!dropdown);
-    };
-
     const handleItemClick = (name: string) => {
 
         if (name == 'Done') {
@@ -36,19 +32,24 @@ const Dropdown = ({ activeFilter, setActiveFilter, tasks, setFilteredTask }: Dro
         setDropdown(!dropdown);
     };
 
-    useEffect(() => {
+    const handleMouseOver = () => {
+        setDropdown(true);
+    };
+
+    const handleMouseOut = () => {
         setDropdown(false);
-    }, [activeFilter])
+    };
+
 
     return (
-        <div>
-            <button type="button" onClick={() => handleClick()} className={s.btn + ' ' + `${activ ? s.btn_active : s.btn_nonActive}`}>
+        <div onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} >
+            <button type="button"    className={s.btn + ' ' + `${activ ? s.btn_active : s.btn_nonActive}`}>
                 {activ ? <DoneActiveIcon /> : <DoneIcon />}
                 {selected == '' ? 'All' : selected}
             </button>
 
-            {dropdown && (
-                <ul className={s.list}>
+            {dropdown &&
+                <ul className={s.list} >
 
                     {options.map((obj: string, i: number) => (
                         <li key={i} className={s.btn + ' ' + s.item + ' ' + `${activeFilter === obj ? s.btn_active : s.btn_nonActive}`}
@@ -59,7 +60,7 @@ const Dropdown = ({ activeFilter, setActiveFilter, tasks, setFilteredTask }: Dro
                         </li>
                     ))}
                 </ul>
-            )}
+            }
         </div>
     );
 

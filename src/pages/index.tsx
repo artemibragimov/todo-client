@@ -22,7 +22,7 @@ export default function Home() {
 
   const [filteredTask, setFilteredTask] = useState(tasks)
 
-  const changeIsDone = (id: number) => {
+  const changeIsDone = (id: Number) => {
     const filteredTasks = tasks.filter((task) => task.id == id)
 
     const { isDone, ...otherData } = filteredTasks[0]
@@ -86,6 +86,9 @@ export default function Home() {
         <div className={s.taskBoard}>
           {filteredTask.map((obj, index) => (
             <Task
+            setTasks={setTasks}
+              filteredTask={filteredTask}
+              setFilteredTask={setFilteredTask}
               changeIsDone={changeIsDone}
               key={index}
               id={obj.id}
