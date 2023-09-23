@@ -1,34 +1,25 @@
-import {  useState } from "react";
+import {FC, SVGProps, useState} from "react";
 import s from './Dropdown.module.css';
-import { DoneIcon, DoneActiveIcon } from '../../assets';
 
 
 interface Dropdown {
-    activeFilter: string;
-    setActiveFilter: (arg0: string) => void;
-    tasks: Array<{ id: number, isDone: boolean, name: string, date: string }>;
-    setFilteredTask: (filterTask: Array<{ id: number, isDone: boolean, name: string, date: string }>) => void;
+    options: string[];
+    Icon: FC<SVGProps<SVGAElement>>;
+    ActiveIcon: FC<SVGProps<SVGAElement>>;
+    handleClick: (arg0: string) => void;
+    isActive: (name: string) => boolean;
 }
 
-const Dropdown = ({ activeFilter, setActiveFilter, tasks, setFilteredTask }: Dropdown) => {
+const Dropdown = ({options, Icon, ActiveIcon, handleClick, isActive}: Dropdown) => {
 
-    const [selected, setSelected] = useState<string>('');
+    const [selected, setSelected] = useState<string>('All');
     const [dropdown, setDropdown] = useState<boolean | null>(null);
 
-    const options = ["All", "Done", "Undone"];
-
-    const active = activeFilter === selected;
+    const isActivated = isActive(selected);
 
     const handleItemClick = (name: string) => {
-
-        if (name == 'Done') {
-            tasks = tasks.filter((task) => task.isDone);
-        } else if (name == 'Undone') {
-            tasks = tasks.filter((task) => !task.isDone);
-        }
-        setFilteredTask(tasks);
+        handleClick(name);
         setSelected(name);
-        setActiveFilter(name);
         setDropdown(!dropdown);
     };
 
@@ -40,23 +31,22 @@ const Dropdown = ({ activeFilter, setActiveFilter, tasks, setFilteredTask }: Dro
         setDropdown(false);
     };
 
-
     return (
-        <div onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} >
-            <button type="button"    className={s.btn + ' ' + `${active ? s.btn_active : s.btn_nonActive}`}>
-                {active ? <DoneActiveIcon /> : <DoneIcon />}
-                {selected == '' ? 'All' : selected}
+        <div onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
+            <button type="button" className={s.btn + ' ' + `${isActivated ? s.btn_active : s.btn_nonActive}`}>
+                {isActivated ? <ActiveIcon/> : <Icon/>}
+                {selected}
             </button>
 
             {dropdown &&
-                <ul className={s.list} >
-
-                    {options.map((obj: string, i: number) => (
-                        <li key={i} className={s.btn + ' ' + s.item + ' ' + `${activeFilter === obj ? s.btn_active : s.btn_nonActive}`}
-                            onClick={() => handleItemClick(obj)}
+                <ul className={s.list}>
+                    {options.map((option: string, i: number) => (
+                        <li key={i}
+                            className={s.btn + ' ' + s.item + ' ' + `${isActive(option) ? s.btn_active : s.btn_nonActive}`}
+                            onClick={() => handleItemClick(option)}
                         >
-                            {activeFilter === obj ? <DoneActiveIcon /> : <DoneIcon />}
-                            {obj}
+                            {isActive(option) ? <ActiveIcon/> : <Icon/>}
+                            {option}
                         </li>
                     ))}
                 </ul>
