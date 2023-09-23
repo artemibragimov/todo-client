@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import s from './Dropdown.module.css'
+import {  useState } from "react";
+import s from './Dropdown.module.css';
 import { DoneIcon, DoneActiveIcon } from '../../assets';
 
 
@@ -15,18 +15,18 @@ const Dropdown = ({ activeFilter, setActiveFilter, tasks, setFilteredTask }: Dro
     const [selected, setSelected] = useState<string>('');
     const [dropdown, setDropdown] = useState<boolean | null>(null);
 
-    const options = ["All", "Done", "Undone"]
+    const options = ["All", "Done", "Undone"];
 
-    let activ = activeFilter === selected ? true : false
+    const active = activeFilter === selected;
 
     const handleItemClick = (name: string) => {
 
         if (name == 'Done') {
-            tasks = tasks.filter((task) => task.isDone)
+            tasks = tasks.filter((task) => task.isDone);
         } else if (name == 'Undone') {
-            tasks = tasks.filter((task) => !task.isDone)
+            tasks = tasks.filter((task) => !task.isDone);
         }
-        setFilteredTask(tasks)
+        setFilteredTask(tasks);
         setSelected(name);
         setActiveFilter(name);
         setDropdown(!dropdown);
@@ -43,8 +43,8 @@ const Dropdown = ({ activeFilter, setActiveFilter, tasks, setFilteredTask }: Dro
 
     return (
         <div onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} >
-            <button type="button"    className={s.btn + ' ' + `${activ ? s.btn_active : s.btn_nonActive}`}>
-                {activ ? <DoneActiveIcon /> : <DoneIcon />}
+            <button type="button"    className={s.btn + ' ' + `${active ? s.btn_active : s.btn_nonActive}`}>
+                {active ? <DoneActiveIcon /> : <DoneIcon />}
                 {selected == '' ? 'All' : selected}
             </button>
 

@@ -1,19 +1,17 @@
-import React, { ReactNode } from "react";
-import s from './Modal.module.css'
+import React, {ReactNode} from "react";
+import s from './Modal.module.css';
 
 interface ModalType {
     children?: ReactNode;
     isOpen: boolean;
     toggle: () => void;
-    setActive: () => void;
 }
 
-export default function Modal({ toggle, setActive, isOpen, children }: ModalType) {
+export default function Modal({toggle, isOpen, children}: ModalType) {
 
     const onclick = () => {
-        toggle()
-        setActive()
-    }
+        toggle();
+    };
 
     return (
         <>

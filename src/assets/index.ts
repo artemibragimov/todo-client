@@ -1,16 +1,15 @@
-export { default as ProfileIcon } from './profileIcon.svg'
-export { default as CelendarIcon } from './vector.svg'
-export { default as CelendarActiveIcon } from './vectorActive.svg'
-export { default as DoneIcon } from './done.svg'
-export { default as DoneActiveIcon } from './doneActive.svg'
-export { default as DateIcon } from './date.svg'
-export { default as DateActiveIcon } from './dateActive.svg'
-export { default as AddIcon } from './add.svg'
-export { default as AddActiveIcon } from './addActive.svg'
-export { default as CloseIcon } from './close.svg'
-export { default as SaveIcon } from './Check_ring.svg'
-export { default as CopleteIcon } from './completed.svg'
-export { default as NonCopleteIcon } from './nonComlete.svg'
-export { default as SettingsIcon } from './settings.svg'
-export { default as UpdateIcon } from './updateIcon.svg'
-export { default as DeleteIcon } from './deleteIcon.svg'
+export {default as ProfileIcon} from './profileIcon.svg';
+export {default as CalendarIcon} from './vector.svg';
+export {default as CalendarActiveIcon} from './vectorActive.svg';
+export {default as DoneIcon} from './done.svg';
+export {default as DoneActiveIcon} from './doneActive.svg';
+export {default as DateIcon} from './date.svg';
+export {default as DateActiveIcon} from './dateActive.svg';
+export {default as AddTaskIcon} from './addTask.svg';
+export {default as CloseIcon} from './close.svg';
+export {default as SaveIcon} from './Check_ring.svg';
+export {default as CompleteIcon} from './completed.svg';
+export {default as NonCompleteIcon} from './nonComlete.svg';
+export {default as SettingsIcon} from './settings.svg';
+export {default as UpdateIcon} from './updateIcon.svg';
+export {default as DeleteIcon} from './deleteIcon.svg';

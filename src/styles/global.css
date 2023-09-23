@@ -1,7 +1,7 @@
-/* Reset and base styles  */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap'); /* Reset and base styles  */
 * {
-  padding: 0px;
-  margin: 0px;
+  padding: 0;
+  margin: 0;
   border: none;
 }
 
@@ -84,8 +84,7 @@ button,
 input[type="submit"] {
   display: inline-block;
   box-shadow: none;
-  background-color: transparent;
-  background: none;
+  background: transparent none;
   cursor: pointer;
 }
 
@@ -117,5 +116,3 @@ html {
 body {
   background: linear-gradient(299.75deg, #B9D5FF 0%, #F6D1FC 98.93%);
 }
-
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');

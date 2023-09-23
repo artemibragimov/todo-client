@@ -1,38 +1,35 @@
 import s from './Task.module.css';
-import { CopleteIcon, SettingsIcon, NonCopleteIcon } from '../../assets';
-import { useEffect, useState } from 'react';
-import { UpdateIcon, DeleteIcon } from '../../assets';
+import {CompleteIcon, SettingsIcon, NonCompleteIcon} from '../../assets';
+import {useEffect, useState} from 'react';
+import {UpdateIcon, DeleteIcon} from '../../assets';
+import useModal from '../../hooks/useModal';
+import Modal from '../modal/Modal';
+import CreateTaskForm from '../createTaskForm/CreateTaskForm';
 
 interface Task {
-    setTasks: (filterTask: Array<{ id: number, isDone: boolean, name: string, date: string }>) => void;
-    filteredTask: Array<{ id: number, isDone: boolean, name: string, date: string }>
-    setFilteredTask: (filterTask: Array<{ id: number, isDone: boolean, name: string, date: string }>) => void;
+    filteredTask: Array<{ id: number, isDone: boolean, name: string, date: string }>;
     isDone: boolean;
     name: string;
     date: string;
     id: number;
-    changeIsDone: (id: number) => void
+    changeIsDone: (id: number) => void;
+    deleteTask: (id: number) => void;
 }
 
-const Task = ({ setTasks, filteredTask, setFilteredTask, isDone, name, date, id, changeIsDone }: Task) => {
+const Task = ({deleteTask, filteredTask, isDone, name, date, id, changeIsDone}: Task) => {
 
     const [isHovering, setIsHovering] = useState(false);
-
-    const remove = () => {
-        const removeTask = filteredTask.filter((task) => task.id !== id)
-        setFilteredTask(removeTask)
-        setTasks(removeTask)
-    }
+    const {isOpen, toggle} = useModal();
 
     useEffect(() => {
-        setIsHovering(false)
-    }, [filteredTask])
+        setIsHovering(false);
+    }, [filteredTask]);
 
     return (
-        <div className={s.task_container}  >
+        <div className={s.task_container}>
             <div className={s.task}>
                 <button onClick={() => changeIsDone(id)}>
-                    {isDone ? <CopleteIcon /> : <NonCopleteIcon />}
+                    {isDone ? <CompleteIcon/> : <NonCompleteIcon/>}
                 </button>
 
                 <div className={s.task_name}>
@@ -44,19 +41,30 @@ const Task = ({ setTasks, filteredTask, setFilteredTask, isDone, name, date, id,
                 </div>
 
                 <button className={s.setting} onClick={() => setIsHovering(true)}>
-                    <SettingsIcon />
+                    <SettingsIcon/>
                 </button>
             </div>
-            {isHovering && <div className={s.setting_btns} onMouseOver={() => setIsHovering(true)} onMouseOut={() => setIsHovering(false)} >
-                <button>
-                    <UpdateIcon />
+            {isHovering && <div className={s.setting_btns} onMouseOver={() => setIsHovering(true)}
+                                onMouseOut={() => setIsHovering(false)}>
+                <button onClick={toggle}>
+                    <UpdateIcon/>
                 </button>
-                <button onClick={remove}>
-                    <DeleteIcon />
+                <button onClick={() => deleteTask(id)}>
+                    <DeleteIcon/>
                 </button>
             </div>}
-        </div >
-    )
-}
 
-export { Task }
+            <Modal isOpen={isOpen} toggle={toggle}>
+                <>
+                    <span>Update task</span>
+                    <CreateTaskForm
+                        filteredTask={filteredTask}
+                        toggle={toggle}
+                    />
+                </>
+            </Modal>
+        </div>
+    );
+};
+
+export default Task;
