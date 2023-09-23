@@ -1,3 +1,18 @@
+.formTitle {
+    background: linear-gradient(259.86deg, #F5EDFD 0%, #FEEFF5 85.32%);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    padding: 4%;
+
+    display: block;
+    width: 100%;
+
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    font-size: 26px;
+    color: #9333EA;
+}
+
 .form {
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
@@ -46,7 +61,7 @@
     width: 74%;
 }
 
-.form_btn{
+.form_btn {
     border-radius: 10px;
     border-style: none;
     font-size: 24px;
@@ -61,11 +76,7 @@
     justify-content: center;
 }
 
-.form_btn p{
-    margin-left: 10px;
-}
-
-.form_buttons p {
+.form_btn p {
     margin: 0 0 0 5%;
 }
 

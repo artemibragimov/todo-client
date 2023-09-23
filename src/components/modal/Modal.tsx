@@ -1,27 +1,29 @@
-import React, {ReactNode} from "react";
+import React, {ReactNode, useRef} from "react";
 import s from './Modal.module.css';
+import useOnClickOutside from "../../hooks/useOnClickOutside";
 
 interface ModalType {
     children?: ReactNode;
-    isOpen: boolean;
-    toggle: () => void;
+    isVisible: boolean;
+    toggle: (boolean: boolean) => void;
 }
 
-export default function Modal({toggle, isOpen, children}: ModalType) {
+const Modal = ({children, isVisible, toggle,}: ModalType) => {
 
-    const onclick = () => {
-        toggle();
-    };
+    const divRef = useRef<HTMLDivElement>(null);
+    useOnClickOutside(divRef, () => toggle(false));
 
     return (
         <>
-            {isOpen && (
-                <div className={s.modal_overlay} onClick={onclick}>
-                    <div onClick={(e) => e.stopPropagation()} className={s.modal_box}>
+            {isVisible && (
+                <div className={s.modal_overlay}>
+                    <div ref={divRef} className={s.modal_box}>
                         {children}
                     </div>
                 </div>
             )}
         </>
     );
-}
+};
+
+export default Modal;

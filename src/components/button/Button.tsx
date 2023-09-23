@@ -4,12 +4,12 @@ import {FC, SVGProps} from "react";
 interface ButtonType {
     name: string;
     Icon: FC<SVGProps<SVGAElement>>;
-    handleClick: () => void;
+    handleClick: ( action: string ) => void;
 }
 
-const Button = ({name, Icon, handleClick}: ButtonType) => {
+const Button = ({ name, Icon, handleClick}: ButtonType) => {
     return (
-        <button onClick={handleClick} className={s.btn}>
+        <button onClick={() => handleClick(name)} className={s.btn}>
             <Icon/>
             {name}
         </button>

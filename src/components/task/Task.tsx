@@ -1,29 +1,24 @@
 import s from './Task.module.css';
 import {CompleteIcon, SettingsIcon, NonCompleteIcon} from '../../assets';
-import {useEffect, useState} from 'react';
+import {useRef, useState} from 'react';
 import {UpdateIcon, DeleteIcon} from '../../assets';
-import useModal from '../../hooks/useModal';
-import Modal from '../modal/Modal';
-import CreateTaskForm from '../createTaskForm/CreateTaskForm';
+import useOnClickOutside from "../../hooks/useOnClickOutside";
 
 interface Task {
-    filteredTask: Array<{ id: number, isDone: boolean, name: string, date: string }>;
+    id: number;
     isDone: boolean;
     name: string;
     date: string;
-    id: number;
     changeIsDone: (id: number) => void;
-    deleteTask: (id: number) => void;
+    handleClick: (action: string, newName: string, id: number) => void;
 }
 
-const Task = ({deleteTask, filteredTask, isDone, name, date, id, changeIsDone}: Task) => {
+const Task = ({id, isDone, name, date, changeIsDone, handleClick}: Task) => {
 
     const [isHovering, setIsHovering] = useState(false);
-    const {isOpen, toggle} = useModal();
 
-    useEffect(() => {
-        setIsHovering(false);
-    }, [filteredTask]);
+    const ref = useRef<HTMLDivElement>(null);
+    useOnClickOutside(ref, () => setIsHovering(false));
 
     return (
         <div className={s.task_container}>
@@ -44,25 +39,17 @@ const Task = ({deleteTask, filteredTask, isDone, name, date, id, changeIsDone}: 
                     <SettingsIcon/>
                 </button>
             </div>
-            {isHovering && <div className={s.setting_btns} onMouseOver={() => setIsHovering(true)}
-                                onMouseOut={() => setIsHovering(false)}>
-                <button onClick={toggle}>
-                    <UpdateIcon/>
-                </button>
-                <button onClick={() => deleteTask(id)}>
-                    <DeleteIcon/>
-                </button>
-            </div>}
-
-            <Modal isOpen={isOpen} toggle={toggle}>
-                <>
-                    <span>Update task</span>
-                    <CreateTaskForm
-                        filteredTask={filteredTask}
-                        toggle={toggle}
-                    />
-                </>
-            </Modal>
+            {isHovering ?
+                <div ref={ref} className={s.setting_btns} onMouseOver={() => setIsHovering(true)}
+                     onMouseOut={() => setIsHovering(false)}>
+                    <button onClick={() => handleClick('Update task', name, id)}>
+                        <UpdateIcon/>
+                    </button>
+                    <button onClick={() => handleClick('Delete task', name, id)}>
+                        <DeleteIcon/>
+                    </button>
+                </div>
+                : null}
         </div>
     );
 };

@@ -1,0 +1,77 @@
+.delete_form{
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 24px;
+}
+.title {
+    background: linear-gradient(259.86deg, #F5EDFD 0%, #FEEFF5 85.32%);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    padding: 4%;
+
+    color: #9333EA;
+
+    display: block;
+    width: 100%;
+
+    font-weight: 700;
+    font-size: 26px;
+}
+
+.question{
+    color: #9333EA;
+    margin: 8% auto;
+}
+
+.question{
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 22px;
+    color: #9333EA;
+    margin: 8% auto;
+    text-align: center  ;
+}
+
+.btn_container {
+    display: flex;
+    justify-content: space-between;
+    margin: 2% auto 0;
+    width: 74%;
+}
+
+.btn {
+    border-radius: 10px;
+    border-style: none;
+    font-size: 24px;
+    transition: color 100ms;
+    padding: 20px 10px;
+    width: 45%;
+    height: 10%;
+    text-align: left;
+    align-items: center;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+}
+
+.btn p{
+    margin: 0 0 0 5%;
+}
+
+.delete_button {
+    background-color: #F564970F;
+    color: #F56497;
+}
+
+.delete_button:hover {
+    background: #F56497ad;
+}
+
+.close_button {
+    background: #6b728044;
+    color: #6B7280;
+}
+
+.close_button:hover {
+    background: #6b7280ad;
+}
