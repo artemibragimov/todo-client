@@ -1,13 +1,15 @@
+.task_container{
+    height: 7vh;
+}
+
 .task {
-    margin: 1% auto 0 auto;
-    padding: 15px;
-    height: 10%;
+    margin: 7px auto 0 auto;
+    padding: 1%;
     display: flex;
     align-items: center;
 
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
-
     background: rgba(147, 51, 234, 0.06);
     border-radius: 10px;
 }
@@ -31,7 +33,7 @@
     height: 15px;
 }
 
-.setting svg{
+.setting svg {
     margin: auto;
 }
 

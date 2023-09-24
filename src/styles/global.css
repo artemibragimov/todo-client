@@ -109,10 +109,8 @@ legend {
 }
 
 html {
-  width: 100vw;
-  height: 100vh;
-}
-
-body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
   background: linear-gradient(299.75deg, #B9D5FF 0%, #F6D1FC 98.93%);
 }

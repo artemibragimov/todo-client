@@ -16,13 +16,33 @@ import TaskForm from '../components/taskForm/TaskForm';
 import Dropdown from '../components/dropdown/Dropdown';
 import Button from "../components/button/Button";
 import Delete from "../components/delete/Delete";
+import Pagination from "../components/pagination/Pagination";
 
 export default function Home() {
 
     const [tasksData, setTasksData] = useState([
-        {id: 1, isDone: false, name: 'learn 1', date: '19.09.2023'},
-        {id: 2, isDone: false, name: 'learn 2', date: '19.09.2023'},
-        {id: 3, isDone: true, name: 'learn 3', date: '19.09.2023'},
+        {id: 0, isDone: true, name: 'learn 1', date: '19.09.2023'},
+        {id: 1, isDone: false, name: 'learn 2', date: '19.09.2023'},
+        {id: 2, isDone: false, name: 'learn 3', date: '19.09.2023'},
+        {id: 3, isDone: true, name: 'learn 4', date: '19.09.2023'},
+        {id: 4, isDone: false, name: 'learn 5', date: '19.09.2023'},
+        {id: 5, isDone: false, name: 'learn 6', date: '19.09.2023'},
+        {id: 6, isDone: true, name: 'learn 7', date: '19.09.2023'},
+        {id: 7, isDone: false, name: 'learn 8', date: '19.09.2023'},
+        {id: 8, isDone: false, name: 'learn 9', date: '19.09.2023'},
+        {id: 9, isDone: true, name: 'learn 10', date: '19.09.2023'},
+        {id: 10, isDone: false, name: 'learn 11', date: '19.09.2023'},
+        {id: 11, isDone: false, name: 'learn 12', date: '19.09.2023'},
+        {id: 12, isDone: true, name: 'learn 13', date: '19.09.2023'},
+        {id: 13, isDone: true, name: 'learn 1', date: '19.09.2023'},
+        {id: 14, isDone: false, name: 'learn 2', date: '19.09.2023'},
+        {id: 15, isDone: false, name: 'learn 3', date: '19.09.2023'},
+        {id: 16, isDone: true, name: 'learn 4', date: '19.09.2023'},
+        {id: 17, isDone: false, name: 'learn 5', date: '19.09.2023'},
+        {id: 18, isDone: false, name: 'learn 6', date: '19.09.2023'},
+        {id: 19, isDone: true, name: 'learn 7', date: '19.09.2023'},
+        {id: 20, isDone: false, name: 'learn 8', date: '19.09.2023'},
+        {id: 21, isDone: false, name: 'learn 9', date: '19.09.2023'},
     ]);
 
     const [isVisible, setIsVisible] = useState(false);
@@ -37,9 +57,9 @@ export default function Home() {
         name: undefined,
         id: undefined
     });
+    const [currentPage, setCurrentPage] = useState(2);
 
     const isActive = (name: string) => (filter === name);
-
     const openModal = (action: string, name?: string, id?: number) => {
         setAction({
             action: action,
@@ -48,7 +68,6 @@ export default function Home() {
         });
         setIsVisible(true);
     };
-
     const createTask = (name: string) => {
         const date = new Date().toLocaleString().slice(0, 10);
         const taskList = [];
@@ -64,7 +83,6 @@ export default function Home() {
         taskList.push(newTask);
         setTasksData(taskList);
     };
-
     const updateTask = (newName: string, id?: number) => {
         const filteredTasks = tasksData.filter((task) => task.id == id);
 
@@ -84,12 +102,10 @@ export default function Home() {
 
         setTasksData(newTasks);
     };
-
     const deleteTask = (id?: number) => {
         const removeTask = tasksData.filter((task) => task.id !== id);
         setTasksData(removeTask);
     };
-
     const updateIsDone = (id: number) => {
         const filteredTasks = tasksData.filter((task) => task.id == id);
 
@@ -108,6 +124,13 @@ export default function Home() {
         });
         setTasksData(newTasks);
     };
+
+    //for pagination
+    const pageSize = 7;
+    const taskPortion = tasks.slice(
+        (currentPage - 1) * pageSize,
+        currentPage * pageSize
+    )
 
     useEffect(() => {
             let newTaskList: { id: number; isDone: boolean; name: string; date: string; }[] = [];
@@ -129,6 +152,7 @@ export default function Home() {
             }
 
             setTasks(newTaskList);
+            setCurrentPage(1)
         },
         [filter, tasksData]);
 
@@ -168,7 +192,15 @@ export default function Home() {
                     </div>
                 </div>
                 <div className={s.taskBoard}>
-                    {tasks.map((obj, index) => (
+
+                    <Pagination
+                        pageSize={pageSize}
+                        totalTask={tasks.length}
+                        currentPage={currentPage}
+                        handleClick={setCurrentPage}
+                    />
+
+                    {taskPortion.map((obj, index) => (
                         <Task
                             handleClick={openModal}
                             changeIsDone={updateIsDone}
