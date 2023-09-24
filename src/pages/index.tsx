@@ -40,7 +40,6 @@ export default function Home() {
 
     const isActive = (name: string) => (filter === name);
 
-
     const openModal = (action: string, name?: string, id?: number) => {
         setAction({
             action: action,
@@ -48,10 +47,9 @@ export default function Home() {
             id: id
         });
         setIsVisible(true);
-        console.log(action) //вид действия ------------------------------------------------------
     };
 
-    const createTask = (name: string, id?: number) => {
+    const createTask = (name: string) => {
         const date = new Date().toLocaleString().slice(0, 10);
         const taskList = [];
 
@@ -66,7 +64,6 @@ export default function Home() {
         taskList.push(newTask);
         setTasksData(taskList);
     };
-
 
     const updateTask = (newName: string, id?: number) => {
         const filteredTasks = tasksData.filter((task) => task.id == id);
@@ -86,7 +83,7 @@ export default function Home() {
         });
 
         setTasksData(newTasks);
-    }
+    };
 
     const deleteTask = (id?: number) => {
         const removeTask = tasksData.filter((task) => task.id !== id);
@@ -111,7 +108,6 @@ export default function Home() {
         });
         setTasksData(newTasks);
     };
-
 
     useEffect(() => {
             let newTaskList: { id: number; isDone: boolean; name: string; date: string; }[] = [];
@@ -213,5 +209,5 @@ export default function Home() {
                     />}
             </Modal>
         </div>
-    )
+    );
 }

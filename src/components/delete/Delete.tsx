@@ -1,5 +1,5 @@
 import s from "./Delete.module.css";
-import {CloseIcon, DeleteIcon} from "../../assets";
+import {BigDeleteIcon, CloseIcon} from "../../assets";
 
 interface DeleteType {
     id?: number,
@@ -24,7 +24,7 @@ const Delete = ({id, handleClick, toggle, title}: DeleteType) => {
 
             <div className={s.btn_container}>
                 <button className={s.delete_button + ' ' + s.btn} onClick={onClick}>
-                    <DeleteIcon/>
+                    <BigDeleteIcon/>
                     <p>Delete</p>
                 </button>
 

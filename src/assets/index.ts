@@ -13,3 +13,4 @@ export {default as NonCompleteIcon} from './nonComlete.svg';
 export {default as SettingsIcon} from './settings.svg';
 export {default as UpdateIcon} from './updateIcon.svg';
 export {default as DeleteIcon} from './deleteIcon.svg';
+export {default as BigDeleteIcon} from './bigDeleteIcon.svg';
