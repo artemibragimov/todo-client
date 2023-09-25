@@ -1,5 +1,5 @@
 import s from '../styles/Home.module.css';
-import {useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 import Task from '../components/task/Task';
 import Modal from "../components/modal/Modal";
 import {
@@ -9,7 +9,9 @@ import {
     DateActiveIcon,
     AddTaskIcon,
     DoneIcon,
-    DoneActiveIcon
+    DoneActiveIcon,
+    FirstNewIcon,
+    FirstOldIcon
 } from '../assets';
 import ToggleButton from '../components/toggleButton/ToggleButton';
 import TaskForm from '../components/taskForm/TaskForm';
@@ -21,28 +23,28 @@ import Pagination from "../components/pagination/Pagination";
 export default function Home() {
 
     const [tasksData, setTasksData] = useState([
-        {id: 0, isDone: true, name: 'learn 1', date: '19.09.2023'},
-        {id: 1, isDone: false, name: 'learn 2', date: '19.09.2023'},
-        {id: 2, isDone: false, name: 'learn 3', date: '19.09.2023'},
-        {id: 3, isDone: true, name: 'learn 4', date: '19.09.2023'},
-        {id: 4, isDone: false, name: 'learn 5', date: '19.09.2023'},
-        {id: 5, isDone: false, name: 'learn 6', date: '19.09.2023'},
-        {id: 6, isDone: true, name: 'learn 7', date: '19.09.2023'},
-        {id: 7, isDone: false, name: 'learn 8', date: '19.09.2023'},
-        {id: 8, isDone: false, name: 'learn 9', date: '19.09.2023'},
-        {id: 9, isDone: true, name: 'learn 10', date: '19.09.2023'},
-        {id: 10, isDone: false, name: 'learn 11', date: '19.09.2023'},
-        {id: 11, isDone: false, name: 'learn 12', date: '19.09.2023'},
-        {id: 12, isDone: true, name: 'learn 13', date: '19.09.2023'},
-        {id: 13, isDone: true, name: 'learn 1', date: '19.09.2023'},
-        {id: 14, isDone: false, name: 'learn 2', date: '19.09.2023'},
-        {id: 15, isDone: false, name: 'learn 3', date: '19.09.2023'},
-        {id: 16, isDone: true, name: 'learn 4', date: '19.09.2023'},
-        {id: 17, isDone: false, name: 'learn 5', date: '19.09.2023'},
-        {id: 18, isDone: false, name: 'learn 6', date: '19.09.2023'},
-        {id: 19, isDone: true, name: 'learn 7', date: '19.09.2023'},
-        {id: 20, isDone: false, name: 'learn 8', date: '19.09.2023'},
-        {id: 21, isDone: false, name: 'learn 9', date: '19.09.2023'},
+        { id: 0, isDone: true, name: 'learn 1', date: '19.09.2023' },
+        { id: 1, isDone: false, name: 'learn 2', date: '20.09.2023' },
+        { id: 2, isDone: false, name: 'learn 3', date: '21.09.2023' },
+        /*{ id: 3, isDone: true, name: 'learn 4', date: '19.09.2023' },
+        { id: 4, isDone: false, name: 'learn 5', date: '19.09.2023' },
+        { id: 5, isDone: false, name: 'learn 6', date: '19.09.2023' },
+        { id: 6, isDone: true, name: 'learn 7', date: '19.09.2023' },
+        { id: 7, isDone: false, name: 'learn 8', date: '19.09.2023' },
+        { id: 8, isDone: false, name: 'learn 9', date: '19.09.2023' },
+        { id: 9, isDone: true, name: 'learn 10', date: '19.09.2023' },
+        { id: 10, isDone: false, name: 'learn 11', date: '19.09.2023' },
+        { id: 11, isDone: false, name: 'learn 12', date: '19.09.2023' },
+        { id: 12, isDone: true, name: 'learn 13', date: '19.09.2023' },
+        { id: 13, isDone: true, name: 'learn 1', date: '19.09.2023' },
+        { id: 14, isDone: false, name: 'learn 2', date: '19.09.2023' },
+        { id: 15, isDone: false, name: 'learn 3', date: '19.09.2023' },
+        { id: 16, isDone: true, name: 'learn 4', date: '19.09.2023' },
+        { id: 17, isDone: false, name: 'learn 5', date: '19.09.2023' },
+        { id: 18, isDone: false, name: 'learn 6', date: '19.09.2023' },
+        { id: 19, isDone: true, name: 'learn 7', date: '19.09.2023' },
+        { id: 20, isDone: false, name: 'learn 8', date: '19.09.2023' },
+        { id: 21, isDone: false, name: 'learn 9', date: '19.09.2023' },*/
     ]);
 
     const [isVisible, setIsVisible] = useState(false);
@@ -60,6 +62,21 @@ export default function Home() {
     const [currentPage, setCurrentPage] = useState(2);
 
     const isActive = (name: string) => (filter === name);
+    const isDate = () => (filter === 'firstNew' || filter === 'firstOld')
+
+    const setDateFilter = () => {
+        switch (filter) {
+            case 'firstOld':
+                setFilter('firstNew')
+                break
+            case 'firstNew':
+                setFilter('firstOld')
+                break
+            default:
+                setFilter('firstNew')
+        }
+    }
+
     const openModal = (action: string, name?: string, id?: number) => {
         setAction({
             action: action,
@@ -68,6 +85,7 @@ export default function Home() {
         });
         setIsVisible(true);
     };
+
     const createTask = (name: string) => {
         const date = new Date().toLocaleString().slice(0, 10);
         const taskList = [];
@@ -83,10 +101,11 @@ export default function Home() {
         taskList.push(newTask);
         setTasksData(taskList);
     };
+
     const updateTask = (newName: string, id?: number) => {
         const filteredTasks = tasksData.filter((task) => task.id == id);
 
-        const {name, ...otherData} = filteredTasks[0];
+        const { name, ...otherData } = filteredTasks[0];
 
         const changeTask = {
             name: newName,
@@ -102,14 +121,16 @@ export default function Home() {
 
         setTasksData(newTasks);
     };
+
     const deleteTask = (id?: number) => {
         const removeTask = tasksData.filter((task) => task.id !== id);
         setTasksData(removeTask);
     };
+
     const updateIsDone = (id: number) => {
         const filteredTasks = tasksData.filter((task) => task.id == id);
 
-        const {isDone, ...otherData} = filteredTasks[0];
+        const { isDone, ...otherData } = filteredTasks[0];
 
         const changeTask = {
             isDone: !isDone,
@@ -133,27 +154,37 @@ export default function Home() {
     )
 
     useEffect(() => {
-            let newTaskList: { id: number; isDone: boolean; name: string; date: string; }[] = [];
-            const date = new Date().toLocaleString().slice(0, 10);
+        let newTaskList: { id: number; isDone: boolean; name: string; date: string; }[] = [];
+        const date = new Date().toLocaleString().slice(0, 10);
 
-            switch (filter) {
-                case 'Done':
-                    newTaskList = tasksData.filter((task) => task.isDone);
-                    break;
-                case 'Undone':
-                    newTaskList = tasksData.filter((task) => !task.isDone);
-                    break;
-                case 'All':
-                    newTaskList = tasksData;
-                    break;
+        switch (filter) {
+            case 'Done':
+                newTaskList = tasksData.filter((task) => task.isDone);
+                break;
+            case 'Undone':
+                newTaskList = tasksData.filter((task) => !task.isDone);
+                break;
+            case 'All':
+                newTaskList = tasksData;
+                break;
+            case 'firstNew':
+                newTaskList = tasksData.sort(function (a, b) {
+                    return parseFloat(a.date) - parseFloat(b.date);
+                });
+                break;
+            case 'firstOld':
+                newTaskList = tasksData.sort(function (a, b) {
+                    return parseFloat(b.date) - parseFloat(a.date);
+                });
+                break;
 
-                default:
-                    newTaskList = tasksData.filter((task) => task.date == date);
-            }
+            default:
+                newTaskList = tasksData.filter((task) => task.date == date);
+        }
 
-            setTasks(newTaskList);
-            setCurrentPage(1)
-        },
+        setTasks(newTaskList);
+        setCurrentPage(1)
+    },
         [filter, tasksData]);
 
     return (
@@ -178,9 +209,9 @@ export default function Home() {
                         <ToggleButton
                             name='Date'
                             Icon={DateIcon}
-                            ActiveIcon={DateActiveIcon}
-                            handleClick={setFilter}
-                            isActive={isActive}
+                            ActiveIcon={filter === 'firstNew' ? FirstNewIcon : FirstOldIcon}
+                            handleClick={setDateFilter}
+                            isActive={isDate}
                         />
                     </div>
                     <div className={s.bottomBar}>
