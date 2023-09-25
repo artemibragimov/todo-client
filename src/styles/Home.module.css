@@ -19,21 +19,7 @@
 
 .taskBoard {
     width: 76%;
-    padding: 3%;
+    padding: 0 3%;
     background: #F4F4F4;
     border-radius: 10px;
-}
-
-.modalTitle {
-    background: linear-gradient(259.86deg, #F5EDFD 0%, #FEEFF5 85.32%);
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    padding: 20px;
-    font-size: 26px;
-    font-weight: 700;
-    color: #9333EA;
-}
-
-.modalContent {
-    margin: 10px;
 }

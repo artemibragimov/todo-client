@@ -1,13 +1,15 @@
+.task_container{
+    height: 7vh;
+}
+
 .task {
-    margin: 1% auto;
-    padding: 0 15px;
-    height: 10%;
+    margin: 7px auto 0 auto;
+    padding: 1%;
     display: flex;
     align-items: center;
 
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
-
     background: rgba(147, 51, 234, 0.06);
     border-radius: 10px;
 }
@@ -19,12 +21,36 @@
 
 .task_date {
     font-size: 16px;
-    display: flex;
-    align-items: center;
-
     color: #6B7280;
 }
 
 .task_date svg {
     margin-left: 15px;
+}
+
+.setting {
+    width: 20px;
+    height: 15px;
+}
+
+.setting svg {
+    margin: auto;
+}
+
+.setting_btns {
+    display: flex;
+    align-items: center;
+
+    margin-left: auto;
+    padding: 0 5px;
+    width: max-content;
+    background: #FFFFFF;
+    border: 2px solid #7D40FF;
+    border-radius: 12px;
+}
+
+.setting_btns button {
+    display: flex;
+    align-items: center;
+    margin: 2px;
 }

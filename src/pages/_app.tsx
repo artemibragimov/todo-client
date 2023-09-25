@@ -1,10 +1,10 @@
-import { AppProps } from 'next/dist/shared/lib/router/router'; 
+import {AppProps} from 'next/dist/shared/lib/router/router';
 import React from 'react';
 import Head from 'next/head';
-import { Header } from '../components/header/Header';
-import './app.css'
+import {Header} from '../components/header/Header';
+import '../styles/global.css';
 
-const MyApp = ({ Component, pageProps }: AppProps): JSX.Element => {
+const MyApp = ({Component, pageProps}: AppProps): JSX.Element => {
     return (
         <>
             <Head>

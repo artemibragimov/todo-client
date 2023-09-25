@@ -1,3 +1,24 @@
+.formTitle {
+    background: linear-gradient(259.86deg, #F5EDFD 0%, #FEEFF5 85.32%);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    padding: 4%;
+
+    display: block;
+    width: 100%;
+
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    font-size: 26px;
+    color: #9333EA;
+}
+
+.form {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 24px;
+}
+
 .form_error {
     color: red;
     text-align: center;
@@ -5,8 +26,8 @@
 
 .text_input {
     display: block;
-    width: 70%;
-    margin: 4% auto 2% auto;
+    width: 74%;
+    margin: 4% auto 0 auto;
     padding: 2%;
     font-family: inherit;
     font-size: 24px;
@@ -36,12 +57,11 @@
 .btn_container {
     display: flex;
     justify-content: space-between;
-    margin: 0 auto;
-    margin-top: 2%;
+    margin: 2% auto 0;
     width: 74%;
 }
 
-.form_btn{
+.form_btn {
     border-radius: 10px;
     border-style: none;
     font-size: 24px;
@@ -53,13 +73,11 @@
     align-items: center;
     cursor: pointer;
     display: flex;
-    align-items: center;
     justify-content: center;
 }
 
-.form_buttons p {
-    margin: 0;
-    margin-left: 5%;
+.form_btn p {
+    margin: 0 0 0 5%;
 }
 
 .submit_button {

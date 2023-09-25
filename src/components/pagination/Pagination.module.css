@@ -1,0 +1,28 @@
+.pagination {
+    height: 7vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 22px;
+    color: #6B7280;
+
+    margin-top: 20px;
+}
+
+.btn {
+    margin: 0 3px;
+    padding: 5px;
+    border-bottom: 2px solid rgba(125, 64, 255, 0.5);
+}
+
+.btn_current {
+    background: #9333EA0F;
+}
+
+.btn:hover {
+    background: #9333EA0F;
+    border-radius: 3px;
+}
